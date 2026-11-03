@@ -33,9 +33,9 @@ export const esNotices = {
     desktopCommands: esDesktopCommands
   },
   keepAwakeOffer: {
-    title: 'Tu equipo entró en suspensión mientras Hermes trabajaba',
+    title: 'Tu equipo entró en suspensión mientras OLYMPUS trabajaba',
     message:
-      'Hermes puede mantener tu equipo activo mientras se ejecuta una tarea. La pantalla se sigue apagando, y con batería el equipo aún puede entrar en suspensión.',
+      'OLYMPUS puede mantener tu equipo activo mientras se ejecuta una tarea. La pantalla se sigue apagando, y con batería el equipo aún puede entrar en suspensión.',
     action: 'Mantener activo mientras trabaja'
   },
   billingBlock: {

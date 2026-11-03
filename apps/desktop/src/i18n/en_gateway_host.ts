@@ -3,13 +3,13 @@ import type { GatewayHostTranslations } from './types_gateway_host'
 // Settings → Gateways copy where the connection cannot change, spread into en.ts.
 export const enGatewayHost: GatewayHostTranslations = {
   unavailableTitle: 'Gateway settings unavailable',
-  unavailableDesc: 'Connection settings can only be changed from the Hermes Desktop app on the computer running it.',
-  webappHostTitle: 'Hermes host',
+  unavailableDesc: 'Connection settings can only be changed from the OLYMPUS Desktop app on the computer running it.',
+  webappHostTitle: 'OLYMPUS host',
   webappHostDesc:
-    'The Webapp always uses the Hermes host that serves it. To switch gateways, sign in to Hermes Cloud or manage saved connections, use the Hermes Desktop app.',
+    'The Webapp always uses the OLYMPUS host that serves it. To switch gateways, sign in to OLYMPUS Cloud or manage saved connections, use the OLYMPUS Desktop app.',
   webAccess: {
     title: 'Web access',
-    intro: 'Open Hermes on this computer from your phone or another computer, signed in with your Nous account. Whoever signs in can run commands on this computer.',
+    intro: 'Open OLYMPUS on this computer from your phone or another computer, signed in with your Nous account. Whoever signs in can run commands on this computer.',
     failed: "Couldn't change web access",
     running: 'Running',
     stopped: 'Stopped',
@@ -17,7 +17,7 @@ export const enGatewayHost: GatewayHostTranslations = {
     stopping: 'Stopping',
     restartNeeded: 'Restart needed',
     unavailable: 'Unavailable',
-    notRunningDetail: 'Start it to open Hermes from another device.',
+    notRunningDetail: 'Start it to open OLYMPUS from another device.',
     needsNous: 'Sign in to your Nous account under Providers first.',
     runningLan: 'Open this address on a device on the same network.',
     runningPublic: 'Served through your URL.',

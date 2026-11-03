@@ -19,12 +19,14 @@ const variants = {
     display: 'Hermes Agent',
     kebab: 'hermes-bundled',
     pascal: 'HermesBundled'
-  }
+  },
+  // Kyrius' OLYMPUS white-label — own org/domain/CLI, same Electron app.
+  olympus: { display: 'OLYMPUS', kebab: 'olympus', pascal: 'Olympus' }
 }
 
 const variant = process.env.HERMES_DESKTOP_VARIANT || ''
-if (!['', 'light', 'bundled', 'store'].includes(variant)) {
-  throw new Error(`Unknown HERMES_DESKTOP_VARIANT ${variant}. expected one of (empty), light, bundled, store`)
+if (!['', 'light', 'bundled', 'store', 'olympus'].includes(variant)) {
+  throw new Error(`Unknown HERMES_DESKTOP_VARIANT ${variant}. expected one of (empty), light, bundled, store, olympus`)
 }
 
 // 'store' is a Store-submission packaging identity layered on the bundled
@@ -54,7 +56,8 @@ const displayName = buildCommit
 
 const kebabSuffix = buildCommit ? `-${buildCommit}` : canary ? '-canary' : ''
 const pascalSuffix = buildCommit ? `Commit${buildCommit}` : canary ? 'Canary' : ''
-const cliName = `${light ? 'hermes-light' : 'hermes'}${kebabSuffix}`
+const olympus = variant === 'olympus'
+const cliName = `${light ? 'hermes-light' : olympus ? 'olympus' : 'hermes'}${kebabSuffix}`
 if (store && (canary || buildCommit)) {
   throw new Error('Store packaging is only eligible for stable releases')
 }
@@ -66,14 +69,14 @@ const identity = {
   store,
   light,
   displayName,
-  appId: `com.nousresearch.${name.kebab}${kebabSuffix}`,
+  appId: `${olympus ? 'com.kyrius' : 'com.nousresearch'}.${name.kebab}${kebabSuffix}`,
   // Store and commit builds do not publish a release feed.
   channel: store || buildCommit ? null : light ? (canary ? 'light-canary' : 'light') : (canary ? 'canary' : 'latest'),
   appNamePascal: `${name.pascal}${pascalSuffix}`,
   artifactNamePascal: name.pascal,
   windowsExecutableName: kebabSuffix ? cliName : displayName,
   cliName,
-  msixAppIdWithOrg: `NousResearch.${name.pascal}${pascalSuffix}`,
+  msixAppIdWithOrg: `${olympus ? 'Kyrius' : 'NousResearch'}.${name.pascal}${pascalSuffix}`,
   ...(store
     ? {
         storeMsix: {

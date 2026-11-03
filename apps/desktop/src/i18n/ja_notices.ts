@@ -32,9 +32,9 @@ export const jaNotices = {
     desktopCommands: jaDesktopCommands
   },
   keepAwakeOffer: {
-    title: 'Hermes の作業中にコンピューターがスリープしました',
+    title: 'OLYMPUS の作業中にコンピューターがスリープしました',
     message:
-      'タスクの実行中は、Hermes がコンピューターのスリープを防げます。画面はいつもどおりオフになり、バッテリー駆動中はスリープすることがあります。',
+      'タスクの実行中は、OLYMPUS がコンピューターのスリープを防げます。画面はいつもどおりオフになり、バッテリー駆動中はスリープすることがあります。',
     action: '実行中はスリープしない'
   },
   billingBlock: {
