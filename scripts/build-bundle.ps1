@@ -37,7 +37,9 @@
 param(
   [switch]$Store,
   [string]$Python = '',
-  [string]$Remote = 'origin'
+  [string]$Remote = 'origin',
+  [ValidateSet('bundled', 'olympus')]
+  [string]$Variant = 'bundled'
 )
 
 # 'Stop' turns the native stderr progress lines of the build into terminating errors on Windows PowerShell 5.
@@ -148,8 +150,8 @@ try {
     & $py scripts/bundles/desktop.py --prepared (Join-Path $work 'prepared.json') --variant store
     if ($LASTEXITCODE) { Fail "Store packaging failed (exit $LASTEXITCODE)" }
   } else {
-    Write-Host "build-bundle: building $sha (sideload)"
-    & $py scripts/bundles/desktop.py --commit $sha --variant bundled --clean
+    Write-Host "build-bundle: building $sha (sideload, variant=$Variant)"
+    & $py scripts/bundles/desktop.py --commit $sha --variant $Variant --clean
     if ($LASTEXITCODE) { Fail "build failed (exit $LASTEXITCODE)" }
   }
 } finally {

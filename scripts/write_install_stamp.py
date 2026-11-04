@@ -234,12 +234,14 @@ def build_stamp(
     #               and a tree without one is damage to them.
     # Release artifacts pin a tag. Commit builds never enter an update channel.
     variant = os.environ.get("HERMES_DESKTOP_VARIANT", "").strip()
-    if variant not in ("", "bootstrap", "bundled", "light", "store", "runtime"):
+    if variant not in ("", "bootstrap", "bundled", "light", "store", "runtime", "olympus"):
         raise SystemExit(
             f"write_install_stamp: unknown HERMES_DESKTOP_VARIANT {variant!r} "
-            "(expected unset, 'bootstrap', 'bundled', 'light', 'store', or 'runtime')"
+            "(expected unset, 'bootstrap', 'bundled', 'light', 'store', 'runtime', or 'olympus')"
         )
-    payload = "bundled" if variant == "store" else (variant or "bootstrap")
+    # 'olympus' is Kyrius' white-label brand on top of the bundled payload shape
+    # (own identity via product-identity.cjs, same runtime-bundling behavior as 'bundled').
+    payload = "bundled" if variant in ("store", "olympus") else (variant or "bootstrap")
     tag = os.environ.get("HERMES_PAYLOAD_TAG") or None
 
     _stable_tag = re.compile(r"^v(0|[1-9]\d{0,2})\.\d+\.\d+$")
