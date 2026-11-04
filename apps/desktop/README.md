@@ -1,47 +1,62 @@
-# Hermes Desktop ☤
+# OLYMPUS Desktop ☤
 
 <p align="center">
-  <a href="https://github.com/NousResearch/hermes-agent/releases"><img src="https://img.shields.io/badge/Download-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-FFD700?style=for-the-badge" alt="Download"></a>
-  <a href="https://hermes-agent.nousresearch.com/docs/"><img src="https://img.shields.io/badge/Docs-hermes--agent.nousresearch.com-FFD700?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://github.com/NousResearch/hermes-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
+  <a href="https://github.com/Moisesjr20/olympus-agent-descktop-integral/releases"><img src="https://img.shields.io/badge/Download-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-0a1628?style=for-the-badge" alt="Download"></a>
+  <a href="https://github.com/Moisesjr20/olympus-agent-descktop-integral"><img src="https://img.shields.io/badge/Fork%20of-NousResearch%2Fhermes--agent-FFD700?style=for-the-badge" alt="Upstream"></a>
+  <a href="https://github.com/Moisesjr20/olympus-agent-descktop-integral/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
 </p>
 
-**The native desktop app for [Hermes Agent](../../README.md) — the self-improving AI agent from [Nous Research](https://nousresearch.com).** Same agent, same skills, same memory as the CLI and gateway, in a polished native window — chat with streaming tool output, side-by-side previews, a file browser, voice, and settings, no terminal required. Available for **macOS, Windows, and Linux**.
+**O desktop nativo do OLYMPUS — fork da Kyrius sobre o [Hermes Agent](../../README.md) da [Nous Research](https://nousresearch.com).** Mesmo agente, mesmas skills, mesma memória do CLI e do gateway, numa janela nativa com a marca OLYMPUS — chat com tool output em tempo real, previews lado a lado, navegador de arquivos, voz e configurações, sem terminal. Disponível pra **macOS, Windows e Linux**.
 
-> **Intel Macs:** the `Hermes-Setup.dmg` bootstrap installer is built for
-> Apple Silicon (arm64) only, so on an Intel Mac it reports "not supported on
-> this Mac". Stable releases build the native `darwin-x64` bundle only when
-> cut with `--with macos-intel`; otherwise install the
-> [CLI](../../README.md) and run `hermes desktop`. See
-> [Platform Support](../../website/docs/getting-started/platform-support.md#build-targets-and-support-priority).
+> Este é um fork white-label: identidade visual (ícones, nome, appId) trocada
+> pra OLYMPUS/Kyrius via `HERMES_DESKTOP_VARIANT=olympus` em
+> [`product-identity.cjs`](./product-identity.cjs); arquitetura, protocolo de
+> gateway e backend Python seguem idênticos ao upstream. Ver
+> [`AGENTS.md`](./AGENTS.md) e o skill `olympus-desktop-integral` do Hermes
+> pra detalhes do rebrand.
 
 <table>
-<tr><td><b>Chat with the full agent</b></td><td>Streaming responses, live tool activity, structured tool summaries, and the same conversation history as every other Hermes surface.</td></tr>
-<tr><td><b>Side-by-side previews</b></td><td>Render web pages, files, and tool outputs in a right-hand pane while you keep chatting.</td></tr>
-<tr><td><b>File browser</b></td><td>Explore and preview the working directory without leaving the app.</td></tr>
-<tr><td><b>Voice</b></td><td>Talk to Hermes and hear it back.</td></tr>
-<tr><td><b>Settings & onboarding</b></td><td>Manage providers, models, tools, and credentials from a real UI. First-run setup gets you to your first message in seconds.</td></tr>
-<tr><td><b>Stays current</b></td><td>Built-in updates pull the latest agent and rebuild the app in place.</td></tr>
+<tr><td><b>Chat com o agente completo</b></td><td>Respostas em streaming, atividade de tools em tempo real, resumos estruturados e o mesmo histórico de conversa de qualquer outra superfície Hermes.</td></tr>
+<tr><td><b>Previews lado a lado</b></td><td>Renderiza páginas web, arquivos e saídas de tools num painel à direita enquanto você continua conversando.</td></tr>
+<tr><td><b>Navegador de arquivos</b></td><td>Explora e visualiza o diretório de trabalho sem saber do app.</td></tr>
+<tr><td><b>Voz</b></td><td>Fala com o OLYMPUS e ouve a resposta.</td></tr>
+<tr><td><b>Configurações & onboarding</b></td><td>Gerencia providers, modelos, tools e credenciais numa UI real.</td></tr>
+<tr><td><b>Bot Mode</b></td><td>Cada perfil Hermes aparece como um agente com chat próprio — a visão nativa da nossa frota multi-agente.</td></tr>
 </table>
 
 ---
 
 ## Install
 
-### Install with Hermes (recommended)
+### Modo dev (testar rápido, sem empacotar)
 
-Already have the Hermes CLI? Just run:
-
-```bash
-hermes desktop
+```powershell
+# Windows — clona, instala deps, sobe isolado do Hermes Desktop principal
+powershell -ExecutionPolicy Bypass -File test-olympus-desktop.ps1
 ```
 
-It builds and launches the GUI against your existing install — same config, keys, sessions, and skills. If Desktop cannot find a usable runtime or saved remote connection, first launch lets you connect to an existing Hermes gateway or install Hermes locally. Local onboarding then walks you through choosing a provider and model.
+```bash
+# macOS/Linux
+npm ci
+HERMES_DESKTOP_VARIANT=olympus npm run dev --workspace apps/desktop
+```
 
-### Prebuilt installers
+### Instalador MSIX definitivo (Windows)
 
-Prebuilt installers are built and distributed via [the Hermes Desktop website.](https://hermes-agent.nousresearch.com/).
+```powershell
+powershell -ExecutionPolicy Bypass -File build-and-install-olympus.ps1
+```
+
+Builda o pacote nativo real (`scripts\build-bundle.ps1 -Variant olympus`, runtime
+Python/Node embutido), assina com certificado de teste local e instala. Exige
+Python 3.11+ e Visual Studio Build Tools (C++) no host de build — ver
+[BUILDING.md](BUILDING.md).
+
+### Instaladores oficiais (upstream, não esta marca)
+
+Os instaladores do Hermes Agent "oficial" (sem rebrand) são distribuídos em
+[hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/) — não
+têm a marca OLYMPUS, só uso se quiser comparar com o upstream puro.
 
 ---
 
@@ -240,7 +255,7 @@ rm "$HOME/.hermes/hermes-agent/.hermes-bootstrap-complete"
 # Rebuild a broken Python venv
 rm -rf "$HOME/.hermes/hermes-agent/venv"
 # Reset a stuck macOS microphone prompt (macOS only)
-tccutil reset Microphone com.nousresearch.hermes
+tccutil reset Microphone com.kyrius.olympus
 ```
 
 **Windows (PowerShell):**
@@ -258,9 +273,10 @@ Remove-Item -Recurse -Force "$env:LOCALAPPDATA\hermes\hermes-agent\venv"
 
 ## Community
 
-- 💬 [Discord](https://discord.gg/NousResearch)
-- 📖 [Documentation](https://hermes-agent.nousresearch.com/docs/)
-- 🐛 [Issues](https://github.com/NousResearch/hermes-agent/issues)
+- 📦 [Repositório (fork OLYMPUS)](https://github.com/Moisesjr20/olympus-agent-descktop-integral)
+- 💬 [Discord (upstream)](https://discord.gg/NousResearch)
+- 📖 [Documentação (upstream)](https://hermes-agent.nousresearch.com/docs/)
+- 🐛 [Issues (upstream)](https://github.com/NousResearch/hermes-agent/issues)
 
 ---
 
@@ -268,4 +284,7 @@ Remove-Item -Recurse -Force "$env:LOCALAPPDATA\hermes\hermes-agent\venv"
 
 MIT — see [LICENSE](../../LICENSE).
 
-Built by [Nous Research](https://nousresearch.com).
+OLYMPUS Desktop é um fork white-label mantido pela Kyrius, sobre o
+[Hermes Agent](https://github.com/NousResearch/hermes-agent), construído pela
+[Nous Research](https://nousresearch.com). Crédito integral ao projeto
+upstream — este fork só troca identidade visual, não reimplementa o agente.
