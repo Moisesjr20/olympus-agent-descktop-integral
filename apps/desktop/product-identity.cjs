@@ -68,6 +68,7 @@ if (store && (canary || buildCommit)) {
 const identity = {
   store,
   light,
+  olympus,
   displayName,
   appId: `${olympus ? 'com.kyrius' : 'com.nousresearch'}.${name.kebab}${kebabSuffix}`,
   // Store and commit builds do not publish a release feed.

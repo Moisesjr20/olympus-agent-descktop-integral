@@ -26,6 +26,7 @@ const {
   windowsExecutableName,
   channel,
   msixAppIdWithOrg,
+  olympus,
   token
 } = require('./product-identity.cjs')
 
@@ -54,6 +55,12 @@ function mustStoreMsix(value) {
 const { OUT_OF_STORE_PUBLISHER, channelBuildRequest, stageChannelManifest } = require('../../scripts/msix-shared.mjs')
 const { macIconResource } = require('./scripts/mac-icon.cjs')
 const channelRequest = channelBuildRequest()
+
+// Kyrius' own out-of-store signing identity for the olympus variant. The MSIX
+// manifest's Publisher field must match the signing certificate's Subject
+// exactly (self-signed test builds included) — using Nous Research's
+// identity here would fail signature validation on install (#olympus-brand).
+const KYRIUS_OUT_OF_STORE_PUBLISHER = 'CN=Kyrius OLYMPUS Dev'
 
 /** @typedef {import("app-builder-lib").Configuration} Configuration */
 
@@ -249,8 +256,8 @@ module.exports = {
     identityName: store ? mustStoreMsix(storeMsixWhenStore).identityName : msixAppIdWithOrg,
     applicationId: appNamePascal,
     displayName,
-    publisher: store ? mustStoreMsix(storeMsixWhenStore).publisher : OUT_OF_STORE_PUBLISHER,
-    publisherDisplayName: store ? mustStoreMsix(storeMsixWhenStore).publisherDisplayName : 'Nous Research',
+    publisher: store ? mustStoreMsix(storeMsixWhenStore).publisher : olympus ? KYRIUS_OUT_OF_STORE_PUBLISHER : OUT_OF_STORE_PUBLISHER,
+    publisherDisplayName: store ? mustStoreMsix(storeMsixWhenStore).publisherDisplayName : olympus ? 'Kyrius' : 'Nous Research',
     // The native quad is the build time (scripts/msix-shared.mjs::nativeQuad),
     // baked into the manifest template, so the builder's own build-number
     // override would stamp a second, conflicting version.
