@@ -1,0 +1,14 @@
+[START] installing C:\Users\moise\Downloads\olympus-agent-descktop-integral\apps\desktop\release\Olympus-0.0.0-win-x64.msix
+[STEP] Add-AppxPackage (new Kyrius.Olympus)
+[OK] install command returned
+[OK] new installed: Kyrius.Olympus_0.0.0.0_x64__3tgcnmnvawbqw
+[STEP] removing old Kyrius.OlympusCommit4ae2e75_0.0.0.0_x64__3tgcnmnvawbqw
+[OK] old removed
+[RESULT] OLYMPUS packages now installed:
+
+Name            : Kyrius.Olympus
+Version         : 0.0.0.0
+PackageFullName : Kyrius.Olympus_0.0.0.0_x64__3tgcnmnvawbqw
+
+
+[DONE]

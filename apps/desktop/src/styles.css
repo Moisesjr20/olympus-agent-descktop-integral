@@ -4,6 +4,48 @@
 @import 'katex/dist/katex.min.css';
 @import '@vscode/codicons/dist/codicon.css';
 
+/* ════════════════════════════════════════════════════════════════════════════
+   OLYMPUS BRAND TOKENS
+   Monte Olimpo visual identity — navy deep space + orange accent
+   ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Navy palette — deep space backgrounds */
+  --olympus-navy-950: #070c18;
+  --olympus-navy-900: #0b1222;
+  --olympus-navy-850: #0f1830;
+  --olympus-navy-800: #16223e;
+  --olympus-navy-700: #1c2a4a;
+  --olympus-navy-600: #243458;
+  
+  /* Orange accent — brand highlight */
+  --olympus-orange-500: #e8623d;
+  --olympus-orange-400: #f2814f;
+  --olympus-orange-300: #ffa379;
+  
+  /* Semantic colors */
+  --olympus-fg: #eaf0fb;
+  --olympus-fg-dim: #96a0b8;
+  --olympus-ok: #37e0a0;
+  --olympus-warn: #ffb547;
+  --olympus-err: #ff5470;
+  
+  /* Special effects */
+  --olympus-firefly: #ffe9a8;        /* Subagent glow */
+  --olympus-vale: #5a6a94;           /* Vale do Esquecimento */
+  --olympus-glow: rgba(232, 98, 61, 0.4); /* Pulsing agent glow */
+}
+
+/* Dark theme overrides for Olympus */
+[data-theme="dark"], .dark {
+  --theme-background-seed: var(--olympus-navy-900);
+  --theme-sidebar-seed: var(--olympus-navy-950);
+  --theme-card-seed: var(--olympus-navy-850);
+  --theme-elevated-seed: var(--olympus-navy-800);
+  --theme-primary: var(--olympus-orange-500);
+  --theme-midground: var(--olympus-orange-500);
+  --ui-accent: var(--olympus-orange-500);
+}
+
 /* Titlebar clusters: 24×24 hit targets, 13.9px glyphs. codicon.css is
    unlayered (`font: 16px/1`); Tailwind utilities in @layer lose that fight. */
 .titlebar-icon-button .codicon[class*='codicon-'] {
