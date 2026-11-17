@@ -31,7 +31,7 @@ export const plugin: HermesPlugin = {
   id: 'olympus-neural-map',
   name: 'Monte Olimpo',
   description: 'Dock central: Council, Kanban, Mapa Neural e Navegador num só lugar.',
-  defaultEnabled: false,
+  defaultEnabled: true,
 
   register(ctx) {
     // Main dock page
