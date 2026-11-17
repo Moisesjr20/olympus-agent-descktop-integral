@@ -13,6 +13,7 @@ import {
   host
 } from '@hermes/plugin-sdk'
 import './dock.css'
+import { NeuralMapCanvas } from './neural-map'
 
 // ════════════════════════════════════════════════════════════════════════════
 // Section wrapper
@@ -163,13 +164,16 @@ function KanbanPeek() {
 // Placeholder sections for Plano B and C
 // ════════════════════════════════════════════════════════════════════════════
 
-function NeuralMapPlaceholder() {
+function NeuralMapSection() {
   return (
-    <Section title="Mapa Neural" icon="circuit-board">
-      <EmptyState 
-        title="Em breve — Plano B"
-        description="Visualização do Monte Olimpo com 490 nós e conexões entre agentes"
-      />
+    <Section 
+      title="Mapa Neural" 
+      icon="circuit-board"
+      action={{ label: 'Expandir', onClick: () => host.navigate('/monte-olimpo/mapa') }}
+    >
+      <div style={{ height: '300px' }}>
+        <NeuralMapCanvas />
+      </div>
     </Section>
   )
 }
@@ -203,7 +207,7 @@ export function MonteOlimpoPage() {
       <div className="olympus-monte-olimpo__grid">
         <CouncilPeek />
         <KanbanPeek />
-        <NeuralMapPlaceholder />
+        <NeuralMapSection />
         <BrowserPlaceholder />
       </div>
     </div>

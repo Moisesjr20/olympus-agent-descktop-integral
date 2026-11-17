@@ -1,0 +1,20 @@
+{
+  "name": "olympus-neural-map",
+  "version": "1.0.0",
+  "description": "Monte Olimpo Neural Map - Canvas visualization of Olympus knowledge graph",
+  "author": "Kyrius",
+  "api": {
+    "module": "plugin_api",
+    "blueprint": "bp"
+  },
+  "permissions": [
+    "fs:read:/opt/data/memory-map"
+  ],
+  "config_schema": {
+    "olimpo_path": {
+      "type": "string",
+      "default": "/opt/data/memory-map/web/olimpo.json",
+      "description": "Path to the olimpo.json graph file"
+    }
+  }
+}
