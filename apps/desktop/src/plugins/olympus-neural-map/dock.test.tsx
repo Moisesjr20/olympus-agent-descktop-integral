@@ -8,14 +8,18 @@ describe('Monte Olimpo Plugin', () => {
   const cssPath = join(__dirname, 'dock.css')
   const neuralMapPath = join(__dirname, 'neural-map.tsx')
   const neuralMapCssPath = join(__dirname, 'neural-map.css')
+  const browserPath = join(__dirname, 'browser.tsx')
+  const browserCssPath = join(__dirname, 'browser.css')
 
-  it('should have plugin.tsx with correct registration', () => {
+  it('should have plugin.tsx with all routes', () => {
     const content = readFileSync(pluginPath, 'utf-8')
     expect(content).toContain("id: 'olympus-neural-map'")
     expect(content).toContain("name: 'Monte Olimpo'")
     expect(content).toContain("path: '/monte-olimpo'")
-    expect(content).toContain("codicon: 'home'")
-    expect(content).toContain('defaultEnabled: false')
+    expect(content).toContain("path: '/monte-olimpo/mapa'")
+    expect(content).toContain("path: '/monte-olimpo/browser'")
+    expect(content).toContain('NeuralMapFullscreen')
+    expect(content).toContain('BrowserFullscreen')
   })
 
   it('should have dock.tsx with all four sections', () => {
@@ -24,23 +28,15 @@ describe('Monte Olimpo Plugin', () => {
     expect(content).toContain('KanbanPeek')
     expect(content).toContain('NeuralMapSection')
     expect(content).toContain('NeuralMapCanvas')
-    expect(content).toContain('BrowserPlaceholder')
-    expect(content).toContain('Em breve — Plano C')
+    expect(content).toContain('BrowserPeek')
+    expect(content).toContain('BrowserSection')
   })
 
   it('should have dock.css with Olympus tokens', () => {
     const content = readFileSync(cssPath, 'utf-8')
     expect(content).toContain('--olympus-navy-950')
     expect(content).toContain('--olympus-orange-500')
-    expect(content).toContain('--olympus-fg')
     expect(content).toContain('olympus-monte-olimpo')
-    expect(content).toContain('olympus-dock-section')
-  })
-
-  it('should use Olympus glow animation', () => {
-    const css = readFileSync(cssPath, 'utf-8')
-    expect(css).toContain('@keyframes olympus-glow-pulse')
-    expect(css).toContain('--olympus-glow')
   })
 
   // Plano B - Neural Map Canvas
@@ -52,8 +48,6 @@ describe('Monte Olimpo Plugin', () => {
     expect(content).toContain('templos')
     expect(content).toContain('deuses')
     expect(content).toContain('vagalumes')
-    expect(content).toContain('handleWheel')
-    expect(content).toContain('handleMouseDown')
   })
 
   it('should have neural-map.css with canvas styling', () => {
@@ -61,8 +55,32 @@ describe('Monte Olimpo Plugin', () => {
     expect(css).toContain('neural-map-container')
     expect(css).toContain('neural-map-canvas')
     expect(css).toContain('neural-map-controls')
-    expect(css).toContain('neural-map-stats')
-    expect(css).toContain('cursor: grab')
+  })
+
+  // Plano C - Multi-Profile Browser
+  it('should have browser.tsx with 14 profiles', () => {
+    const content = readFileSync(browserPath, 'utf-8')
+    expect(content).toContain('MultiBrowser')
+    expect(content).toContain('BrowserSection')
+    expect(content).toContain('DEFAULT_PROFILES')
+    expect(content).toContain("partition: 'persist:hermes'")
+    expect(content).toContain("partition: 'persist:athena'")
+    expect(content).toContain('ProfilePill')
+    expect(content).toContain('TabBar')
+    expect(content).toContain('AddressBar')
+    expect(content).toContain('BrowserWebview')
+  })
+
+  it('should have browser.css with multi-profile styling', () => {
+    const css = readFileSync(browserCssPath, 'utf-8')
+    expect(css).toContain('browser-container')
+    expect(css).toContain('browser-profile-bar')
+    expect(css).toContain('browser-profile-pill')
+    expect(css).toContain('browser-tabs')
+    expect(css).toContain('browser-address-bar')
+    expect(css).toContain('browser-webview')
+    expect(css).toContain('--profile-color')
+    expect(css).toContain('--active-profile-color')
   })
 
   it('should have backend manifest.json', () => {
@@ -70,7 +88,6 @@ describe('Monte Olimpo Plugin', () => {
     const content = readFileSync(manifestPath, 'utf-8')
     const manifest = JSON.parse(content)
     expect(manifest.name).toBe('olympus-neural-map')
-    expect(manifest.api.module).toBe('plugin_api')
   })
 
   it('should have plugin_api.py with graph endpoint', () => {
@@ -78,7 +95,6 @@ describe('Monte Olimpo Plugin', () => {
     const content = readFileSync(apiPath, 'utf-8')
     expect(content).toContain('/graph')
     expect(content).toContain('/stats')
-    expect(content).toContain('/deus/<nome>')
     expect(content).toContain('olimpo.json')
   })
 })

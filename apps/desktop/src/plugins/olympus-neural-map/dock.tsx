@@ -14,6 +14,7 @@ import {
 } from '@hermes/plugin-sdk'
 import './dock.css'
 import { NeuralMapCanvas } from './neural-map'
+import { BrowserSection } from './browser'
 
 // ════════════════════════════════════════════════════════════════════════════
 // Section wrapper
@@ -178,13 +179,14 @@ function NeuralMapSection() {
   )
 }
 
-function BrowserPlaceholder() {
+function BrowserPeek() {
   return (
-    <Section title="Navegador" icon="globe">
-      <EmptyState 
-        title="Em breve — Plano C"
-        description="Navegador multi-perfil com 14 contextos isolados e controle Olympus"
-      />
+    <Section 
+      title="Navegador" 
+      icon="globe"
+      action={{ label: 'Abrir', onClick: () => host.navigate('/monte-olimpo/browser') }}
+    >
+      <BrowserSection />
     </Section>
   )
 }
@@ -208,7 +210,7 @@ export function MonteOlimpoPage() {
         <CouncilPeek />
         <KanbanPeek />
         <NeuralMapSection />
-        <BrowserPlaceholder />
+        <BrowserPeek />
       </div>
     </div>
   )
