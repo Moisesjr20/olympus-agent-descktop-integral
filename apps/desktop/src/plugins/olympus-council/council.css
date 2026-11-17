@@ -1,3 +1,10 @@
+/* Olympus Council Grid
+   Uses system CSS variables (--ui-*) that are overridden by Olympus brand tokens
+   in styles.css when dark theme is active. No hardcoded colors needed.
+   
+   Runtime copy at $HERMES_HOME/plugins/olympus-council/desktop/plugin.js
+   also uses system variables — both copies skin together via Task 1 tokens. */
+
 .olympus-council-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
